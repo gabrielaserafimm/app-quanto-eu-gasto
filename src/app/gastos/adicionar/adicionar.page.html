@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title color="primary">Adicionar Gasto</ion-title>
+      </ion-toolbar> 
+  </ion-header>
+<ion-content [formGroup]="form">
+    
+    <ion-item> 
+        <ion-label position="stacked">Nome: </ion-label>
+            <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+        <ion-label position="stacked">Método de Pagamento: </ion-label>
+        <ion-select formControlName="metod_pag">
+            <ion-select-option value="Cartão de Crédito">Cartão de Crédito</ion-select-option>
+            <ion-select-option value="Cartão de Débito">Cartão de Débito</ion-select-option>
+            <ion-select-option value="Dinheiro">Dinheiro</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Valor: </ion-label>
+        <ion-input type="number" formControlName="valor"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Data: </ion-label>
+        <ion-datetime displayFormat="DD/MM/YY" formControlName="data"></ion-datetime>
+    </ion-item>
+    
+    <ion-item>
+        <ion-label position="stacked">Mês: </ion-label>
+        <ion-select formControlName="mes">
+            <ion-select-option value="Janeiro">Janeiro</ion-select-option>
+            <ion-select-option value="Fevereiro">Fevereiro</ion-select-option>
+            <ion-select-option value="Março">Março</ion-select-option>
+            <ion-select-option value="Abril">Abril</ion-select-option>
+            <ion-select-option value="Maio">Maio</ion-select-option>
+            <ion-select-option value="JUNHO">Junho</ion-select-option>
+            <ion-select-option value="Julho">Julho</ion-select-option>
+            <ion-select-option value="Agosto">Agosto</ion-select-option>
+            <ion-select-option value="Setembro">Setembro</ion-select-option>
+            <ion-select-option value="Outubro">Outubro</ion-select-option>
+            <ion-select-option value="Novembro">Novembro</ion-select-option>
+            <ion-select-option value="Dezembro">Dezembro</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-fab vertical="bottom" horizontal="end">
+        <ion-fab-button (click)="salvar()" [disabled]="!form.valid">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
