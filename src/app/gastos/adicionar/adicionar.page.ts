@@ -29,15 +29,16 @@ export class AdicionarPage implements OnInit {
     });
 
     const id = +this.activatedRoute.snapshot.params.id;
-    const gasto = this.gastosService.findById(id);
-    if(gasto){
-      this.form.patchValue({
-        ...gasto,
-        data: gasto.data && gasto.data
-      });
+    
+    if(id){
+      const gasto = this.gastosService.findById(id);
+        if(gasto){
+        this.form.patchValue({
+          ...gasto,
+        });
+      }
     }
   }
-
   salvar() {
     this.gastosService.save(this.form.value);
     this.router.navigate(['/tabs/inicio']);
