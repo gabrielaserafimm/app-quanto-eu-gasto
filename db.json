@@ -1,0 +1,37 @@
+{
+    "gastos":[
+
+        {
+           "id": 1,
+            "nome": "Mercado",
+            "metod_pag": "MetodoPagamento.CARTAOCRED",
+            "valor": 251,
+            "data": "2021-09-19",
+            "mes": "Mes.NOVEMBRO"
+        },
+        {
+            "id": 2,
+            "nome": "Lazer",
+            "metod_pag": "MetodoPagamento.DINHEIRO",
+            "valor": 152.99,
+            "data": "2021-11-11",
+            "mes": "Mes.FEVEREIRO"
+        },
+        {
+            "id": 3,
+            "nome": "Roupas",
+            "metod_pag": "MetodoPagamento.DINHEIRO",
+            "valor": 57.90,
+            "data": "2021-11-19",
+            "mes": "Mes.ABRIL"  
+        },
+        {
+            "id": 4,
+            "nome": "Presentes",
+            "metod_pag": "MetodoPagamento.DINHEIRO",
+            "valor": 125.90,
+            "data": "2021-05-09",
+            "mes": "Mes.MAIO"
+        }
+    ]
+}
