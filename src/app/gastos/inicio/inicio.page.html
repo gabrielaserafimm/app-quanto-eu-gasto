@@ -11,7 +11,7 @@
           <ion-item-option class="edit" [routerLink]="['/adicionar', gasto.id]">
             <ion-icon size="small" name="create"></ion-icon>
           </ion-item-option>
-          <ion-item-option (click)="excluir(gasto)">
+          <ion-item-option (click)="confirmRemove(gasto)">
             <ion-icon size="small" name="trash"></ion-icon>
           </ion-item-option>
         </div>

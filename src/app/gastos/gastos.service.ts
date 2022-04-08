@@ -1,40 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Gasto, Mes, MetodoPagamento } from './gastos.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GastosService {
 
-  private gastos: Gasto[]; 
-  private contador = 5;
+  constructor(
+    private httpClient: HttpClient,
+  ) {}
+  
+  getGastos(): Observable<Gasto[]> {
+    return this.httpClient.get<Gasto[]>(`${environment.apiUrl}/gastos`);
+  }
 
-  constructor() {
-    this.gastos = JSON.parse(localStorage.getItem('gastos'))??[];
+  remove(id: number):Observable<void>{
+    return this.httpClient.delete<void>(`${environment.apiUrl}/gastos/${id}`);
+  }
 
-   }
+  findById(id: number): Observable<Gasto> {
+    return this.httpClient.get<Gasto>(`${environment.apiUrl}/gastos/${id}`);
+  }
 
-   public getGastos(){
-     return this.gastos;
-   }
-
-   public remove(nome: string){
-     this.gastos = this.gastos.filter((gasto) => gasto.nome !== nome);
-     localStorage.setItem('gastos', JSON.stringify(this.gastos));
-   }
-
-   public save(gasto: Gasto){
-     if (gasto.id){
-       const index = this.gastos.findIndex(g => g.id === gasto.id);
-       this.gastos[index] = gasto;
-      }else{
-       const id = this.contador++;
-       this.gastos.push({...gasto,id});
-     }
-     localStorage.setItem('gastos', JSON.stringify(this.gastos));
-    }
-
-    public findById(id: number) {
-      return this.gastos.find(gasto => gasto.id === id);
-    }
+  save(gasto: Gasto): Observable<Gasto> {
+    return this.httpClient.post<Gasto>(`${environment.apiUrl}/gastos`, gasto);
+  }
 }
