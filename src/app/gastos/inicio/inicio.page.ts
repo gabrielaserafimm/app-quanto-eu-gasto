@@ -70,7 +70,7 @@ ViewDidLeave {
     this.alertController
       .create({
         header: 'Exclusão',
-        message: `Você deseja excluir o gasto ${gasto.nome}?`,
+        message: `Você deseja excluir o gasto <b>${gasto.nome}</b>?`,
         buttons: [
           {
             text: 'Sim',

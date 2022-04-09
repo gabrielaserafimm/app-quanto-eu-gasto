@@ -60,7 +60,7 @@ export class AdicionarPage implements
           });
         }
       },
-      () => this.messageService.error(`Erro ao buscar o gasto com o código ${id}`,() => this.findById(id))
+      () => this.messageService.error(`Erro ao buscar o gasto com o código <b>${id}</b>`,() => this.findById(id))
     );
   }
   ionViewWillEnter(): void {
@@ -87,7 +87,7 @@ export class AdicionarPage implements
     this.gastosService.save(this.form.value).subscribe(
       () => this.router.navigate(['tabs/inicio']),
       () =>
-      this.messageService.error(`Erro ao salvar o novo gasto ${nome}`, () =>
+      this.messageService.error(`Erro ao salvar o novo gasto <b>${nome}</b>`, () =>
         this.salvar()
       )
     ); 
