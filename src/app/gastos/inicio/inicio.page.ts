@@ -25,6 +25,7 @@ ViewWillLeave,
 ViewDidLeave {
 
   gastos: Gasto[];
+  loading = false;
 
   constructor(
     private alertController: AlertController,
@@ -60,9 +61,16 @@ ViewDidLeave {
   }
 
   listGastos(){
+    this.loading = true;
     this.gastosService.getGastos().subscribe(
-      (gastos) => this.gastos = gastos,
-      () => this.messageService.error('Erro ao buscar a lista de gastos', () => this.listGastos())
+      (gastos) => {
+        this.gastos = gastos
+        this.loading = false;
+      },
+      () => {
+        this.messageService.error('Erro ao buscar a lista de gastos', () => this.listGastos())
+        this.loading = false;
+      }
     );
   }  
 
