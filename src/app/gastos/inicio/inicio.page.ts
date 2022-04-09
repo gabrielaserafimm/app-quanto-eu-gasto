@@ -8,6 +8,7 @@ ViewWillEnter,
 ViewWillLeave,
 } from '@ionic/angular';
 import { Gasto, MetodoPagamento, Mes } from '../gastos.model';
+import { MessageService } from 'src/app/services/message.service';
 import { GastosService } from '../gastos.service';
 
 @Component({
@@ -28,7 +29,7 @@ ViewDidLeave {
   constructor(
     private alertController: AlertController,
     private gastosService: GastosService,
-    private toastController: ToastController
+    private messageService: MessageService
   ) {
     this.gastos = [];
   }
@@ -61,7 +62,7 @@ ViewDidLeave {
   listGastos(){
     this.gastosService.getGastos().subscribe(
       (gastos) => this.gastos = gastos,
-      ()       => this.onFail('Erro ao buscar a lista de gastos', () => this.listGastos())
+      () => this.messageService.error('Erro ao buscar a lista de gastos', () => this.listGastos())
     );
   }  
 
@@ -89,23 +90,6 @@ ViewDidLeave {
       () => {
         this.listGastos();
       },
-      () => this.onFail('Erro ao excluir o gasto', () => this.remove(gasto)));
-  }
-  
-  async onFail(message: string, handler: () => void){
-    const toast = await this.toastController.create({
-      message,
-      color: 'danger',
-      position: 'top',
-      buttons: [
-        {
-          icon: 'refresh-outline',
-          side: 'start',
-          handler: () => handler(),
-        },
-        { side: 'end', icon: 'close-outline' },
-      ],
-    });
-    toast.present();
-  }     
+      () => this.messageService.error('Erro ao excluir o gasto', () => this.remove(gasto)));
+  }   
 }

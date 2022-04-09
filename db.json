@@ -1,37 +1,44 @@
 {
-    "gastos":[
-
-        {
-           "id": 1,
-            "nome": "Mercado",
-            "metod_pag": "MetodoPagamento.CARTAOCRED",
-            "valor": 251,
-            "data": "2021-09-19",
-            "mes": "Mes.NOVEMBRO"
-        },
-        {
-            "id": 2,
-            "nome": "Lazer",
-            "metod_pag": "MetodoPagamento.DINHEIRO",
-            "valor": 152.99,
-            "data": "2021-11-11",
-            "mes": "Mes.FEVEREIRO"
-        },
-        {
-            "id": 3,
-            "nome": "Roupas",
-            "metod_pag": "MetodoPagamento.DINHEIRO",
-            "valor": 57.90,
-            "data": "2021-11-19",
-            "mes": "Mes.ABRIL"  
-        },
-        {
-            "id": 4,
-            "nome": "Presentes",
-            "metod_pag": "MetodoPagamento.DINHEIRO",
-            "valor": 125.90,
-            "data": "2021-05-09",
-            "mes": "Mes.MAIO"
-        }
-    ]
+  "gastos": [
+    {
+      "id": 1,
+      "nome": "Mercado",
+      "metod_pag": "Cartão de Crédito",
+      "valor": 251,
+      "data": "2021-09-19",
+      "mes": "Novembro"
+    },
+    {
+      "id": 2,
+      "nome": "Lazer",
+      "metod_pag": "Dinheiro",
+      "valor": 152.99,
+      "data": "2021-11-11",
+      "mes": "Fevereiro"
+    },
+    {
+      "id": 3,
+      "nome": "Roupas",
+      "metod_pag": "Cartão de Débito",
+      "valor": 57.9,
+      "data": "2021-11-19",
+      "mes": "Abril"
+    },
+    {
+      "id": 4,
+      "nome": "Presentes",
+      "metod_pag": "Dinheiro",
+      "valor": 125.9,
+      "data": "2021-05-09",
+      "mes": "Maio"
+    },
+    {
+      "id": 5,
+      "nome": "teste",
+      "metod_pag": "Cartão de Crédito",
+      "valor": 0.1,
+      "data": "2022-04-09T13:50:13.528-03:00",
+      "mes": "Novembro"
+    }
+  ]
 }

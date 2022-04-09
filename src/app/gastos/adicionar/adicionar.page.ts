@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'; 
+import { MessageService } from '../../services/message.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -29,7 +30,8 @@ export class AdicionarPage implements
     private formBuilder: FormBuilder,
     private gastosService: GastosService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -45,36 +47,49 @@ export class AdicionarPage implements
 
     const id = +this.activatedRoute.snapshot.params.id;    
     if(id){
-     this.gastosService.findById(id).subscribe((gasto) =>{
-        if(gasto){
-        this.form.patchValue({
-          ...gasto,
-        });
-      }
-    });
+      this.findById(id);
+    }
   }
-}
-ionViewWillEnter(): void {
-  console.log('AdicionarPage ionViewWillEnter');
-}
 
-ionViewDidEnter(): void {
-  console.log('AdicionarPage ionViewDidEnter');
-}
+  findById(id: number){
+    this.gastosService.findById(id).subscribe(
+      (gasto) => {
+        if (gasto) {
+          this.form.patchValue({
+            ...gasto,
+          });
+        }
+      },
+      () => this.messageService.error(`Erro ao buscar o gasto com o código ${id}`,() => this.findById(id))
+    );
+  }
+  ionViewWillEnter(): void {
+    console.log('AdicionarPage ionViewWillEnter');
+  }
 
-ionViewWillLeave(): void {
-  console.log('AdicionarPage ionViewWillLeave');
-}
+  ionViewDidEnter(): void {
+    console.log('AdicionarPage ionViewDidEnter');
+  }
 
-ionViewDidLeave(): void {
-  console.log('AdicionarPage ionViewDidLeave');
-}
+  ionViewWillLeave(): void {
+    console.log('AdicionarPage ionViewWillLeave');
+  }
 
-ngOnDestroy(): void {
-  console.log('AdicionarPage ngOnDestroy');
-}
+  ionViewDidLeave(): void {
+    console.log('AdicionarPage ionViewDidLeave');
+  }
+
+  ngOnDestroy(): void {
+    console.log('AdicionarPage ngOnDestroy');
+  }
   salvar() {
-    this.gastosService.save(this.form.value).subscribe(() => this.router.navigate(['adicionar']));
-    this.router.navigate(['/tabs/inicio']);
-  } 
+    const { nome } = this.form.value;
+    this.gastosService.save(this.form.value).subscribe(
+      () => this.router.navigate(['tabs/inicio']),
+      () =>
+      this.messageService.error(`Erro ao salvar o novo gasto ${nome}`, () =>
+        this.salvar()
+      )
+    ); 
+  }
 }
