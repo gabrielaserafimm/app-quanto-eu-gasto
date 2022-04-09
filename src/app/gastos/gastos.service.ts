@@ -26,6 +26,9 @@ export class GastosService {
   }
 
   save(gasto: Gasto): Observable<Gasto> {
-    return this.httpClient.post<Gasto>(`${environment.apiUrl}/gastos`, gasto);
+    if(gasto.id){
+      return this.httpClient.put<Gasto>(`${environment.apiUrl}/gastos/${gasto.id}`, gasto);
+    }
+      return this.httpClient.post<Gasto>(`${environment.apiUrl}/gastos`, gasto);
   }
 }
