@@ -17,6 +17,14 @@ const routes: Routes = [
         loadChildren: () => import('../gastos/adicionar/adicionar.module').then(m => m.AdicionarPageModule)
       },
       {
+        path: 'renda-list',
+        loadChildren: () => import('../gastos/renda-list/renda-list.module').then(m => m.RendaListPageModule)
+      },
+      {
+        path: 'renda-register',
+        loadChildren: () => import('../gastos/renda-register/renda-register.module').then(m => m.RendaRegisterPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'
