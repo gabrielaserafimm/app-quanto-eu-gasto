@@ -74,7 +74,7 @@ ViewDidLeave {
     );
   }  
 
-  confirmRemove(renda: Renda) {
+  confirmRemoveRenda(renda: Renda) {
     this.alertController
       .create({
         header: 'Exclusão',
@@ -82,7 +82,7 @@ ViewDidLeave {
         buttons: [
           {
             text: 'Sim',
-            handler: () => this.remove(renda),
+            handler: () => this.removeRenda(renda),
           },
           {
             text: 'Não',
@@ -92,12 +92,12 @@ ViewDidLeave {
       .then((alert) => alert.present());
   }
 
-  remove(renda: Renda) {
-    this.gastosService.remove(renda.id)
+  removeRenda(renda: Renda) {
+    this.gastosService.removeRenda(renda.id)
       .subscribe(
       () => {
         this.listRendas();
       },
-      () => this.messageService.error('Erro ao excluir a renda', () => this.remove(renda)));
+      () => this.messageService.error('Erro ao excluir a renda', () => this.removeRenda(renda)));
   }   
 }

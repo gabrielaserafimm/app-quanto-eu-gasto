@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title color="primary">Valores à Receber</ion-title>
+    <ion-title color="primary">Rendas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,33 +9,33 @@
   <ion-item-sliding *ngFor="let renda of rendas">
 
     <ion-item-options side="start">
-      <ion-item-option color="secondary" [routerLink]="['/renda-register', renda.id]">
-        <ion-icon name="pencil" slot="icon-only"></ion-icon>
+      <ion-item-option color="secondary" [routerLink]="['/tabs/renda-register', renda.id]">
+        <ion-icon name="pencil"></ion-icon>
       </ion-item-option>
     </ion-item-options>
 
     <ion-item-options side="end">
-      <ion-item-option color="danger" (click)="excluir(renda)">
-        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      <ion-item-option color="danger" (click)="confirmRemoveRenda(renda)">
+        <ion-icon name="trash"></ion-icon>
       </ion-item-option>
     </ion-item-options>
 
     <ion-item>
       <ion-label>
-        <h2>{{renda.nomeRenda}}</h2>
-        <h3>Descrição: <strong>{{renda.descricao}}</strong></h3>
+        <h2 color="secondary"><strong>{{renda.nomeRenda}}</strong></h2>
+        <h3>Descrição: {{renda.descricao}}</h3>
         <h3>
           Valor:
           <ion-text>
             <strong> {{renda.valor | currency : 'R$ '}} </strong>
           </ion-text>
         </h3>
-        <small>
+        <h3>
           Data:
-          <ion-text color="medium">
+          <ion-text>
             {{renda.data | date: 'dd/MM/yyyy'}}
           </ion-text>
-        </small>
+        </h3>
       </ion-label>
     </ion-item>
 

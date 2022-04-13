@@ -47,8 +47,16 @@
       "nomeRenda": "Salário",
       "descricao": "Salário da Empresa Nitro",
       "metod_pag": "Cartão de Crédito",
-      "valor": 2500.00,
+      "valor": 2500,
       "data": "2022-04-12T21:29:32.567-03:00"
+    },
+    {
+      "id": 2,
+      "nomeRenda": "Freelancer",
+      "descricao": "Criaçao do cardapio para o cliente Mario Rosa",
+      "metod_pag": "Cartão de Débito",
+      "valor": 0.1,
+      "data": "2022-03-13T13:12:06.448-03:00"
     }
   ]
 }
