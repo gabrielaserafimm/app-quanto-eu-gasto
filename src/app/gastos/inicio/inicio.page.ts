@@ -7,7 +7,7 @@ ViewDidLeave,
 ViewWillEnter,
 ViewWillLeave,
 } from '@ionic/angular';
-import { Gasto, MetodoPagamento, Mes } from '../gastos.model';
+import { Gasto } from '../gastos.model';
 import { MessageService } from 'src/app/services/message.service';
 import { GastosService } from '../gastos.service';
 

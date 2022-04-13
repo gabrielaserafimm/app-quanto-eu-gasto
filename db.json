@@ -40,5 +40,15 @@
       "data": "2022-04-09T13:50:13.528-03:00",
       "mes": "Novembro"
     }
+  ],
+  "rendas": [
+    {
+      "id": 1,
+      "nomeRenda": "Salário",
+      "descricao": "Salário da Empresa Nitro",
+      "metod_pag": "Cartão de Crédito",
+      "valor": 2500.00,
+      "data": "2022-04-12T21:29:32.567-03:00"
+    }
   ]
 }

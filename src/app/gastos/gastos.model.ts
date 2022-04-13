@@ -27,3 +27,12 @@ export enum Mes{
     NOVEMBRO  = 'Novembro',
     DEZEMBRO  = 'Dezembro',
 }
+
+export interface Renda {
+    id: number;
+    nomeRenda: string;
+    descricao: string;
+    metod_pag: MetodoPagamento;
+    valor: number;
+    data: Date;
+}
