@@ -5,18 +5,16 @@ ion-spinner {
 ion-list{
     color:#fff;
     font-family: 'Poppins', sans-serif;
-        ion-item-option{ 
-        .ion-item{
-            display: flex;
-            flex-direction: row;
-            width: 24px;
-            height: 24px;
-            margin-left: 30px;
-        }
-    }
 }
 ion-label{
     h2{
         color: #7567E5;
     }
+}
+.item-native{
+    background: #7567E5;
+}
+ion-label {
+    border-left: 4px solid #5451d7;
+    padding: 0 10px;
 }

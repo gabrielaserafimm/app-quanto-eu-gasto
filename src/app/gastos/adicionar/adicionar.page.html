@@ -4,7 +4,10 @@
       </ion-toolbar> 
   </ion-header>
 <ion-content [formGroup]="form">
-    
+    <div class="ion-text-center" *ngIf="loading">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
     <ion-item> 
         <ion-label position="stacked">Nome: </ion-label>
             <ion-input type="text" formControlName="nome"></ion-input>
@@ -44,6 +47,7 @@
             <ion-select-option value="Dezembro">Dezembro</ion-select-option>
         </ion-select>
     </ion-item>
+</div>
     <ion-fab vertical="bottom" horizontal="end">
         <ion-fab-button (click)="salvar()" [disabled]="!form.valid">
           <ion-icon name="checkmark-outline"></ion-icon>

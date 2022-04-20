@@ -20,10 +20,11 @@
       </ion-item-option>
     </ion-item-options>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-label>
         <h2 color="secondary"><strong>{{renda.nomeRenda}}</strong></h2>
         <h3>Descrição: {{renda.descricao}}</h3>
+        <h3>Pagamento: {{renda.metod_pag}}</h3>
         <h3>
           Valor:
           <ion-text>
@@ -44,7 +45,7 @@
 
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button [routerLink]="['/tabs/renda-register']">
-      <ion-icon name="checkmark-outline"></ion-icon>
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
