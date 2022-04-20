@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: () => import('../gastos/renda-register/renda-register.module').then(m => m.RendaRegisterPageModule)
       },
       {
+        path: 'conta-bancaria',
+        loadChildren: () => import('../conta-bancaria/conta-bancaria.module').then( m => m.ContaBancariaPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'

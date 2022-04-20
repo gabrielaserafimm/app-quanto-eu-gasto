@@ -1,0 +1,22 @@
+<ion-content>
+  <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner><br><br><br><br>
+  <div *ngIf="!loading">
+    <ion-card *ngFor="let conta of contas">  
+      <ion-card-content>
+        <div class="pt-1">
+          <h3>{{conta.nome}}</h3>
+        </div>
+        <div class="pt-2">
+          <div class="opcoes">
+            <ion-item-option class="edit" [routerLink]="['/tabs/conta-bancaria', conta.id]">
+              <ion-icon size="small" name="create"></ion-icon>
+            </ion-item-option>
+            <ion-item-option (click)="confirmRemove(conta)">
+              <ion-icon size="small" name="trash"></ion-icon>
+            </ion-item-option>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
