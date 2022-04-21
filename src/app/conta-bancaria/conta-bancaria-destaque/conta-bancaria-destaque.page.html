@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>conta-bancaria-destaque</ion-title>
+    <ion-title color="primary">Contas Bancárias Destaques</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-card *ngFor="let conta of contaBancaria"> 
+      <div class="conteudo">
+        <div class="pt-1">
+          <h3 class="banco">{{conta.banco}}</h3> 
+        </div>
+      </div>
+      <ion-card-content> 
+        <div class="pt-1">
+          <h3>{{conta.nome}}</h3>        
+          <h3>Agência: {{conta.agencia}}</h3>        
+        </div>
+        <div class="pt-2"> 
+          <h3>CPF: {{conta.cpf}}</h3>
+          <h3>Conta: {{conta.conta}}</h3>
+        </div>        
+      </ion-card-content>
+    </ion-card> 
 </ion-content>

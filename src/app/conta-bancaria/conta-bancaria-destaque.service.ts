@@ -31,7 +31,7 @@ export class ContaBancariaDestaqueService {
     }
 
     this.contasIds = [...this.contasIds, id];
-    // this.contasIds.push(id);
+    
     localStorage.setItem('wishList', JSON.stringify(this.contasIds));
     this.messageMessage.success(`Conta bancária ${nome} foi para a lista de destaques`);
   }
