@@ -6,46 +6,46 @@
 
 <ion-content>
   <ion-list>
-  <ion-item-sliding *ngFor="let renda of rendas">
-
-    <ion-item-options side="start">
-      <ion-item-option color="secondary" [routerLink]="['/tabs/renda-register', renda.id]">
-        <ion-icon name="pencil"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-
-    <ion-item-options side="end">
-      <ion-item-option color="danger" (click)="confirmRemoveRenda(renda)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-
-    <ion-item lines="none">
-      <ion-label>
-        <h2 color="secondary"><strong>{{renda.nomeRenda}}</strong></h2>
-        <h3>Descrição: {{renda.descricao}}</h3>
-        <h3>Pagamento: {{renda.metod_pag}}</h3>
-        <h3>
-          Valor:
-          <ion-text>
-            <strong> {{renda.valor | currency : 'R$ '}} </strong>
-          </ion-text>
-        </h3>
-        <h3>
-          Data:
-          <ion-text>
-            {{renda.data | date: 'dd/MM/yyyy'}}
-          </ion-text>
-        </h3>
-      </ion-label>
-    </ion-item>
-
+    <ion-item-sliding *ngFor="let renda of rendas">
+      
+      <ion-item-options side="start">
+        <ion-item-option color="secondary" [routerLink]="['/tabs/renda-register', renda.id]">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="confirmRemoveRenda(renda)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      
+      <ion-item lines="none">
+        <ion-label>
+          <h2 color="secondary"><strong>{{renda.nomeRenda}}</strong></h2>
+          <h3>Descrição: {{renda.descricao}}</h3>
+          <h3>Pagamento: {{renda.metod_pag}}</h3>
+          <h3>
+            Valor:
+            <ion-text>
+              <strong> {{renda.valor | currency : 'R$ '}} </strong>
+            </ion-text>
+          </h3>
+          <h3>
+            Data:
+            <ion-text>
+              {{renda.data | date: 'dd/MM/yyyy'}}
+            </ion-text>
+          </h3>
+        </ion-label>
+      </ion-item>
+      
     </ion-item-sliding>
   </ion-list>
-
-  <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button [routerLink]="['/tabs/renda-register']">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button [routerLink]="['/tabs/renda-register']">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
