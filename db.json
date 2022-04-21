@@ -58,5 +58,31 @@
       "valor": 0.1,
       "data": "2022-03-13T13:12:06.448-03:00"
     }
+  ],
+  "contas": [
+    {
+      "nome": "Maria da Silva Pereira",
+      "conta": 72685,
+      "cpf": 16548715266,
+      "agencia": 3308,
+      "banco": "Nu Pagamentos",
+      "id": 1
+    },
+    {
+      "nome": "Pedro Simão",
+      "conta": 95625,
+      "cpf": 16236925800,
+      "agencia": 6525,
+      "banco": "Bradesco",
+      "id": 2
+    },
+    {
+      "nome": "Mario José Limas",
+      "conta": 25468,
+      "cpf": 11548569512,
+      "agencia": 3632,
+      "banco": "Itaú",
+      "id": 3
+    }
   ]
 }
