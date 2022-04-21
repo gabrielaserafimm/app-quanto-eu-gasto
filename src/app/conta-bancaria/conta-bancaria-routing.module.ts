@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ContaBancariaPage
+  },
+  {
+    path: 'conta-bancaria-destaque',
+    loadChildren: () => import('./conta-bancaria-destaque/conta-bancaria-destaque.module').then( m => m.ContaBancariaDestaquePageModule)
   }
 ];
 
