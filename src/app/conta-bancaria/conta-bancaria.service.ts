@@ -9,6 +9,8 @@ import { ContaBancaria } from './conta-bancaria.model';
 })
 export class ContaBancariaService {
 
+  private contaBancaria: ContaBancaria[];
+
   constructor(
     private HttpClient: HttpClient) { }
 
@@ -18,5 +20,9 @@ export class ContaBancariaService {
 
   save(contaBancaria: ContaBancaria) {
     return this.HttpClient.post(`${environment.apiUrl}/contas`, contaBancaria);
+  }
+
+  public findById(id: number) {
+    return this.contaBancaria.find(contaBancaria => contaBancaria.id === id);
   }
 }

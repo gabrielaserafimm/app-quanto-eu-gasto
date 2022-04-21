@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ContaBancaria } from './conta-bancaria.model';
 import { ContaBancariaService } from './conta-bancaria.service';
+import { ContaBancariaDestaqueService } from './conta-bancaria-destaque.service';
 
 @Component({
   selector: 'app-conta-bancaria',
@@ -15,7 +16,8 @@ export class ContaBancariaPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private ContaBancariaService: ContaBancariaService
+    private ContaBancariaService: ContaBancariaService,
+    private ContaBancariaDestaqueService: ContaBancariaDestaqueService,
   ) {}
 
   ngOnInit() {
@@ -32,16 +34,29 @@ export class ContaBancariaPage implements OnInit {
   }
   async add() {
     const alert = await this.alertController.create({
-      header: 'Cadastro de Conta Bancária',
+      cssClass: 'secondary',
+      header: 'Cadastro de Conta Bancária',      
       inputs: [
         {
           name: 'nome',
           placeholder: 'Nome',
+        },        
+        {
+          name: 'cpf',
+          placeholder: 'CPF',
+        },
+        {
+          name: 'banco',
+          placeholder: 'Banco',
+        },        
+        {
+          name: 'agencia',
+          placeholder: 'Agência',
         },
         {
           name: 'conta',
           placeholder: 'Conta',
-        },
+        }
       ],
       buttons: [
         {
@@ -58,5 +73,9 @@ export class ContaBancariaPage implements OnInit {
     });
     alert.present();
 
+  }
+
+  addDestaque(contaBancaria: ContaBancaria) {
+    this.ContaBancariaDestaqueService.add(contaBancaria);
   }
 }
