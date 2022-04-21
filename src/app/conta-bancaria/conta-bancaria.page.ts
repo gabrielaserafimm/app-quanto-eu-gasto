@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ContaBancaria } from './conta-bancaria.model';
 import { ContaBancariaService } from './conta-bancaria.service';
 import { ContaBancariaDestaqueService } from './conta-bancaria-destaque.service';
+import { MessageService } from 'src/app/services/message.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-conta-bancaria',
@@ -10,20 +12,23 @@ import { ContaBancariaDestaqueService } from './conta-bancaria-destaque.service'
   styleUrls: ['./conta-bancaria.page.scss'],
 })
 export class ContaBancariaPage implements OnInit {
-
+  
   contaBancaria: ContaBancaria[];
   loading = false;
-
+  
   constructor(
     private alertController: AlertController,
     private ContaBancariaService: ContaBancariaService,
     private ContaBancariaDestaqueService: ContaBancariaDestaqueService,
+    private actionSheetController: ActionSheetController,
+    private messageService: MessageService,
+    private router: Router
   ) {}
-
+    
   ngOnInit() {
     this.loadContaBancaria();
   }
-
+    
   loadContaBancaria() {
     this.loading = true;
     this.ContaBancariaService.findAll().subscribe((contaBancaria) => {
@@ -31,7 +36,40 @@ export class ContaBancariaPage implements OnInit {
       this.loading = false;
       this.contaBancaria = contaBancaria;
     });
+  }  
+    
+  confirmRemoveConta(contaBancaria: ContaBancaria) {
+    this.alertController
+    .create({
+      header: 'Exclusão',
+      message: `Você deseja excluir a conta <b>${contaBancaria.nome}</b>?`,
+      buttons: [
+        {
+          text: 'Sim',
+          handler: () => this.removeConta(contaBancaria),
+        },
+        {
+          text: 'Não',
+        },
+      ],
+    })
+    .then((alert) => alert.present());
   }
+    
+  removeConta(contaBancaria: ContaBancaria) {
+    this.ContaBancariaService.removeConta(contaBancaria.id)
+    .subscribe(
+      () => {
+        this.loadContaBancaria();
+      },
+      () => this.messageService.error('Erro ao excluir a conta', () => this.removeConta(contaBancaria))
+    );
+  } 
+      
+  addDestaque(contaBancaria: ContaBancaria) {
+    this.ContaBancariaDestaqueService.add(contaBancaria); 
+  }
+
   async add() {
     const alert = await this.alertController.create({
       cssClass: 'secondary',
@@ -71,11 +109,6 @@ export class ContaBancariaPage implements OnInit {
         }
       ]
     });
-    alert.present();
-
-  }
-
-  addDestaque(contaBancaria: ContaBancaria) {
-    this.ContaBancariaDestaqueService.add(contaBancaria);
-  }
+    alert.present();      
+  }    
 }

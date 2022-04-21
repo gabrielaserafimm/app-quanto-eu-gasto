@@ -1,8 +1,7 @@
 h3.banco {
-    border-bottom: 1px solid #dddd;
     font-weight: 700;
     font-size: 16px;
-    padding: 0 0 10px 15px;
+    padding: 0 10px 0 15px;
     color: #5451d7;
 }
 h3 {
@@ -32,20 +31,23 @@ ion-card{
                 text-align: center;
                 margin-top: 10px;
             }
-            ion-item-option{
-                background-color: #7567E5;
-                width: 20px;
-                ion-icon{
-                    width: 15px;
-                }
-            }
-            .opcoes{
-                display: flex;
-                flex-direction: row;
-                width: 24px;
-                height: 24px;
-                margin-left: 30px;
-            }
         }
+    }
+}
+.conteudo {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #dddddd;
+    justify-content: space-between;
+}
+.opcoes{
+    display: flex;
+    flex-direction: row;
+    height: 24px;
+    margin-left: 30px;
+    margin-top: 10px;
+    ion-item-option {
+        color: #5451d7;
+        background: white;
     }
 }

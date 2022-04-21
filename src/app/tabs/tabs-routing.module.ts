@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: () => import('../conta-bancaria/conta-bancaria.module').then( m => m.ContaBancariaPageModule)
       },
       {
+        path: 'conta-bancaria-destaque',
+        loadChildren: () => import('../conta-bancaria/conta-bancaria-destaque/conta-bancaria-destaque.module').then( m => m.ContaBancariaDestaquePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'

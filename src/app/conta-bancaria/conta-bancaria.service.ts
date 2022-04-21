@@ -14,12 +14,22 @@ export class ContaBancariaService {
   constructor(
     private HttpClient: HttpClient) { }
 
+  getConta(): Observable<ContaBancaria[]> {
+    return this.HttpClient.get<ContaBancaria[]>(`${environment.apiUrl}/contas`);
+  }
+
   findAll(): Observable<ContaBancaria[]>{
     return this.HttpClient.get<ContaBancaria[]>(`${environment.apiUrl}/contas`);
   }
 
-  save(contaBancaria: ContaBancaria) {
-    return this.HttpClient.post(`${environment.apiUrl}/contas`, contaBancaria);
+  save(contaBancaria: ContaBancaria): Observable<ContaBancaria> {
+    if(contaBancaria.id){
+      return this.HttpClient.put<ContaBancaria>(`${environment.apiUrl}/gastos/${contaBancaria.id}`, contaBancaria);
+    }
+      return this.HttpClient.post<ContaBancaria>(`${environment.apiUrl}/gastos`, contaBancaria);
+  }
+  removeConta(id: number):Observable<void>{
+    return this.HttpClient.delete<void>(`${environment.apiUrl}/contas/${id}`);
   }
 
   public findById(id: number) {
