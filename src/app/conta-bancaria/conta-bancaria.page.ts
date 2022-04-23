@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { ContaBancaria } from './conta-bancaria.model';
 import { ContaBancariaService } from './conta-bancaria.service';
 import { ContaBancariaDestaqueService } from './conta-bancaria-destaque.service';
 import { MessageService } from 'src/app/services/message.service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-conta-bancaria',
@@ -20,10 +20,10 @@ export class ContaBancariaPage implements OnInit {
     private alertController: AlertController,
     private ContaBancariaService: ContaBancariaService,
     private ContaBancariaDestaqueService: ContaBancariaDestaqueService,
-    private actionSheetController: ActionSheetController,
     private messageService: MessageService,
-    private router: Router
-  ) {}
+  ) {
+    this.contaBancaria = [];
+  }
     
   ngOnInit() {
     this.loadContaBancaria();

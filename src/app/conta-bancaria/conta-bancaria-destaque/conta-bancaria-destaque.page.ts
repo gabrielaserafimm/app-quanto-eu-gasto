@@ -15,10 +15,19 @@ export class ContaBancariaDestaquePage implements OnInit {
   constructor(private contaBancariaDestaque: ContaBancariaDestaqueService) {}
 
   ngOnInit() {
+    this.loadDestaque();
+  }
+
+  loadDestaque(){
     this.loading = true;
     this.contaBancariaDestaque.getDestaques().subscribe((contaBancaria) => {
       this.contaBancaria = contaBancaria;
       this.loading = false;
     });
+  }
+
+  remove(contaBancaria: ContaBancaria) {
+    this.contaBancariaDestaque.remove(contaBancaria);
+    this.loadDestaque();
   }
 }

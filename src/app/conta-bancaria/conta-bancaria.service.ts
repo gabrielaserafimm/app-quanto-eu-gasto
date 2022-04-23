@@ -33,6 +33,6 @@ export class ContaBancariaService {
   }
 
   public findById(id: number) {
-    return this.contaBancaria.find(contaBancaria => contaBancaria.id === id);
+    return this.HttpClient.get<ContaBancaria[]>(`${environment.apiUrl}/contas/${id}`);
   }
 }

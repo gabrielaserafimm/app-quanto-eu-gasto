@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { MessageService } from '../services/message.service';
 import { ContaBancariaService } from './conta-bancaria.service';
 import { ContaBancaria } from './conta-bancaria.model';
@@ -12,7 +12,7 @@ export class ContaBancariaDestaqueService {
 
   constructor(
     private ContaBancariaService: ContaBancariaService,
-    private messageMessage: MessageService,
+    private messageMessage: MessageService
   ) {
     this.contasIds = JSON.parse(localStorage.getItem('destaques')) ?? [];
   }
@@ -21,18 +21,24 @@ export class ContaBancariaDestaqueService {
     const requests = this.contasIds.map((contaBancariaId) =>
       this.ContaBancariaService.findById(contaBancariaId)
     );
-    return forkJoin(requests);
+    return requests.length ? forkJoin(requests) : of([]) ;
   }
 
   add({ id, nome }: ContaBancaria) {
-    if(this.contasIds.some(contaBancariaId => contaBancariaId === id)) {
-      this.messageMessage.error(`Conta bancária ${nome} não foi para a lista de destaques`);
+    if (this.contasIds.some((contaBancariaId) => contaBancariaId === id)) {
+      this.messageMessage.error(`Conta bancária ${nome} já está na sua lista de destaques`);
       return;
     }
 
     this.contasIds = [...this.contasIds, id];
     
-    localStorage.setItem('wishList', JSON.stringify(this.contasIds));
+    localStorage.setItem('destaques', JSON.stringify(this.contasIds));
     this.messageMessage.success(`Conta bancária ${nome} foi para a lista de destaques`);
+  }
+
+  remove({ id, nome }: ContaBancaria) {
+    this.contasIds = this.contasIds.filter((contaBancariaId) => contaBancariaId !== id);
+    localStorage.setItem('destaques', JSON.stringify(this.contasIds));
+    this.messageMessage.success(`Conta bancária ${nome} removido da lista de destaques!`);
   }
 }
