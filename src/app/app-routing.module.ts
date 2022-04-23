@@ -30,6 +30,11 @@ const routes: Routes = [
     path: 'conta-bancaria-destaque',
     loadChildren: () => import('./conta-bancaria/conta-bancaria-destaque/conta-bancaria-destaque.module').then( m => m.ContaBancariaDestaquePageModule)
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./gastos/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
+
 
 
 ];
