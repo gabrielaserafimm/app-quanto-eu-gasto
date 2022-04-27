@@ -14,15 +14,6 @@
     <ion-label position="stacked">Descrição: </ion-label>
         <ion-input type="text" formControlName="descricao"></ion-input>
 </ion-item>
-  
-  <ion-item>
-      <ion-label position="stacked">Método de Pagamento: </ion-label>
-      <ion-select formControlName="metod_pag">
-          <ion-select-option value="Cartão de Crédito">Cartão de Crédito</ion-select-option>
-          <ion-select-option value="Cartão de Débito">Cartão de Débito</ion-select-option>
-          <ion-select-option value="Dinheiro">Dinheiro</ion-select-option>
-      </ion-select>
-  </ion-item>
   <ion-item>
       <ion-label position="stacked">Valor: </ion-label>
       <ion-input type="number" formControlName="valor"></ion-input>
@@ -30,6 +21,14 @@
   <ion-item>
       <ion-label position="stacked">Data: </ion-label>
       <ion-datetime displayFormat="DD/MM/YY" formControlName="data"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Pagamento: </ion-label>
+    <ion-select formControlName="contas" multiple="true" cancelText="Cancelar" [compareWith]="compareWith">
+      <ion-select-option *ngFor="let conta of contas" [value]="conta">
+        {{ conta.banco }}
+      </ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-fab vertical="bottom" horizontal="end">
       <ion-fab-button (click)="salvarRenda()" [disabled]="!form.valid">

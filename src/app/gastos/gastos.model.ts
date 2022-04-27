@@ -1,3 +1,5 @@
+import { ContaBancaria } from '../conta-bancaria/conta-bancaria.model';
+
 export interface Gasto {
     id: number;
     nome: string;
@@ -5,6 +7,7 @@ export interface Gasto {
     valor: number;
     data: Date;
     mes: Mes;
+    contas: ContaBancaria[];
 }
 
 export enum MetodoPagamento{

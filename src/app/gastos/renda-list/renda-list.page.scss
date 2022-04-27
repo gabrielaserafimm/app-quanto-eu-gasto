@@ -18,3 +18,12 @@ ion-label {
     border-left: 4px solid #5451d7;
     padding: 0 10px;
 }
+.contas {
+    margin: 0 0;
+    list-style-type: none;
+    padding-inline-start: 0px;
+  
+    li {
+      font-weight: bold;
+    }
+  }

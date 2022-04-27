@@ -9,6 +9,8 @@ import {
   ViewWillLeave,
 } from '@ionic/angular';
 import { GastosService } from '../gastos.service';
+import { ContaBancaria } from '../../conta-bancaria/conta-bancaria.model';
+import { ContaBancariaService } from '../../conta-bancaria/conta-bancaria.service';
 
 @Component({
   selector: 'app-renda-register',
@@ -24,24 +26,29 @@ export class RendaRegisterPage implements
     ViewDidLeave
 {
   form: FormGroup;
+  contas: ContaBancaria[];
 
   constructor(
     private formBuilder: FormBuilder,
     private gastosService: GastosService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private contaBancariaService: ContaBancariaService
   ) {}
 
   ngOnInit() {
     console.log('RendaRegisterPage ngOnInit');
+
+    this.contaBancariaService.findAll().subscribe((contas) => this.contas = contas);
+    
     this.form = this.formBuilder.group({
       id:[''],
       nomeRenda: ['', Validators.required],
       descricao: ['', Validators.required],
-      metod_pag: ['Cartão de Crédito',Validators.required],
       valor: [0.1, Validators.required],
       data: ['', Validators.required],
+      contas: [[]],
     });
 
     const id = +this.activatedRoute.snapshot.params.id;    
@@ -81,6 +88,19 @@ export class RendaRegisterPage implements
   ngOnDestroy(): void {
     console.log('RendaRegisterPage ngOnDestroy');
   }
+
+  compareWith(o1: ContaBancaria, o2: ContaBancaria | ContaBancaria[]) {
+    if (!o1 || !o2) {
+      return o1 === o2;
+    }
+
+    if (Array.isArray(o2)) {
+      return o2.some((u: ContaBancaria) => u.id === o1.id);
+    }
+
+    return o1.id === o2.id;
+  }
+
   salvarRenda() {
     const { nomeRenda } = this.form.value;
     this.gastosService.saveRenda(this.form.value).subscribe(

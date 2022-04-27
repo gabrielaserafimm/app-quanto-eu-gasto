@@ -24,7 +24,6 @@
         <ion-label>
           <h2 color="secondary"><strong>{{renda.nomeRenda}}</strong></h2>
           <h3>Descrição: {{renda.descricao}}</h3>
-          <h3>Pagamento: {{renda.metod_pag}}</h3>
           <h3>
             Valor:
             <ion-text>
@@ -36,7 +35,14 @@
             <ion-text>
               {{renda.data | date: 'dd/MM/yyyy'}}
             </ion-text>
-          </h3>
+            <ion-text *ngIf="renda.contas?.lenth"> </ion-text></h3>
+          
+            <h3 *ngFor="let conta of renda.contas">
+              Pagamento:
+              <strong>{{ conta.banco }} | {{ conta.nomeConta }}</strong>
+            </h3>
+          
+          
         </ion-label>
       </ion-item>
       
