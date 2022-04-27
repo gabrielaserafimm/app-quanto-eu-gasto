@@ -24,9 +24,9 @@ export class ContaBancariaService {
 
   save(contaBancaria: ContaBancaria): Observable<ContaBancaria> {
     if(contaBancaria.id){
-      return this.HttpClient.put<ContaBancaria>(`${environment.apiUrl}/gastos/${contaBancaria.id}`, contaBancaria);
+      return this.HttpClient.put<ContaBancaria>(`${environment.apiUrl}/contas/${contaBancaria.id}`, contaBancaria);
     }
-      return this.HttpClient.post<ContaBancaria>(`${environment.apiUrl}/gastos`, contaBancaria);
+      return this.HttpClient.post<ContaBancaria>(`${environment.apiUrl}/contas`, contaBancaria);
   }
   removeConta(id: number):Observable<void>{
     return this.HttpClient.delete<void>(`${environment.apiUrl}/contas/${id}`);
