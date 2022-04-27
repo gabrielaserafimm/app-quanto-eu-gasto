@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title color="primary">Cadastrar conta bancária</ion-title>
+    </ion-toolbar> 
+</ion-header>
+<ion-content [formGroup]="form">
+  
+  <ion-item> 
+      <ion-label position="stacked">Nome: </ion-label>
+          <ion-input type="text" formControlName="nomeConta"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label position="stacked">CPF: </ion-label>
+      <ion-input type="number" formControlName="cpf"></ion-input>
+  </ion-item>
+  <ion-item> 
+    <ion-label position="stacked">Banco: </ion-label>
+        <ion-input type="text" formControlName="banco"></ion-input>
+</ion-item>
+  <ion-item>
+    <ion-label position="stacked">Agência: </ion-label>
+    <ion-input type="number" formControlName="agencia"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="stacked">Conta: </ion-label>
+  <ion-input type="number" formControlName="conta"></ion-input>
+</ion-item>
+  <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button (click)="salvarConta()" [disabled]="!form.valid">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+</ion-content>

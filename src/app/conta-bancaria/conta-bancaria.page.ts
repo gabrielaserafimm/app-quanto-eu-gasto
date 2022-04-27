@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ViewWillEnter } from '@ionic/angular';
 import { ContaBancaria } from './conta-bancaria.model';
 import { ContaBancariaService } from './conta-bancaria.service';
 import { ContaBancariaDestaqueService } from './conta-bancaria-destaque.service';
@@ -11,7 +11,9 @@ import { MessageService } from 'src/app/services/message.service';
   templateUrl: './conta-bancaria.page.html',
   styleUrls: ['./conta-bancaria.page.scss'],
 })
-export class ContaBancariaPage implements OnInit {
+export class ContaBancariaPage implements 
+OnInit,
+ViewWillEnter {
   
   contaBancaria: ContaBancaria[];
   loading = false;
@@ -26,7 +28,28 @@ export class ContaBancariaPage implements OnInit {
   }
     
   ngOnInit() {
+    console.log('ContaBancariaPage ngOnInit');
+  }
+
+  ionViewWillEnter(): void {
     this.loadContaBancaria();
+    console.log('ContaBancariaPage ionViewWillEnter');
+  }
+  
+  ionViewDidEnter(): void {
+    console.log('ContaBancariaPage ionViewDidEnter');
+  }
+  
+  ionViewWillLeave(): void {
+    console.log('ContaBancariaPage ionViewWillLeave');
+  }
+  
+  ionViewDidLeave(): void {
+    console.log('ContaBancariaPage ionViewDidLeave');
+  }
+  
+  ngOnDestroy(): void {
+    console.log('ContaBancariaPage ngOnDestroy');
   }
     
   loadContaBancaria() {
@@ -68,47 +91,6 @@ export class ContaBancariaPage implements OnInit {
       
   addDestaque(contaBancaria: ContaBancaria) {
     this.ContaBancariaDestaqueService.add(contaBancaria); 
-  }
-
-  async add() {
-    const alert = await this.alertController.create({
-      cssClass: 'secondary',
-      header: 'Cadastro de Conta Bancária',      
-      inputs: [
-        {
-          name: 'nome',
-          placeholder: 'Nome',
-        },        
-        {
-          name: 'cpf',
-          placeholder: 'CPF',
-        },
-        {
-          name: 'banco',
-          placeholder: 'Banco',
-        },        
-        {
-          name: 'agencia',
-          placeholder: 'Agência',
-        },
-        {
-          name: 'conta',
-          placeholder: 'Conta',
-        }
-      ],
-      buttons: [
-        {
-          text: 'Salvar',
-          handler: (value) => {
-            this.loading = true;
-            this.ContaBancariaService.save(value).subscribe(() => this.loadContaBancaria());
-          }
-        },
-        {
-          text: 'Cancelar'
-        }
-      ]
-    });
-    alert.present();      
-  }    
+  } 
+  
 }

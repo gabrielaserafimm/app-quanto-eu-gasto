@@ -44,24 +44,42 @@
   "rendas": [
     {
       "id": 1,
-      "nomeRenda": "Salário",
-      "descricao": "Salário da Empresa Nitro",
-      "metod_pag": "Cartão de Crédito",
-      "valor": 2500,
-      "data": "2022-04-12T21:29:32.567-03:00"
+      "nomeRenda": "FreeLancer",
+      "descricao": "Layout para empresa de teste",
+      "valor": 1500,
+      "data": "2022-04-26T23:37:23.756-03:00",
+      "contas": [
+        {
+          "nomeConta": "Pedro Simão",
+          "conta": 95625,
+          "cpf": 16236925800,
+          "agencia": 6525,
+          "banco": "Bradesco",
+          "id": 2
+        }
+      ]
     },
     {
       "id": 2,
-      "nomeRenda": "Freelancer",
-      "descricao": "Criaçao do cardapio para o cliente Mario Rosa",
-      "metod_pag": "Cartão de Débito",
-      "valor": 0.1,
-      "data": "2022-03-13T13:12:06.448-03:00"
+      "nomeRenda": "Salário",
+      "descricao": "Salário feito pela empresa exemplo",
+      "valor": 5000,
+      "data": "2022-04-17T23:41:20.817-03:00",
+      "contas": [
+        {
+          "nomeConta": "Maria da Silva Pereira",
+          "conta": 72685,
+          "cpf": 16548715266,
+          "agencia": 3308,
+          "banco": "Nu Pagamentos",
+          "id": 1
+        }
+      ]
     }
   ],
   "contas": [
     {
-      "nome": "Maria da Silva Pereira",
+      "nomeConta": "Maria da Silva Pereira",
       "conta": 72685,
       "cpf": 16548715266,
       "agencia": 3308,
@@ -69,7 +87,7 @@
       "id": 1
     },
     {
-      "nome": "Pedro Simão",
+      "nomeConta": "Pedro Simão",
       "conta": 95625,
       "cpf": 16236925800,
       "agencia": 6525,
@@ -77,12 +95,20 @@
       "id": 2
     },
     {
-      "nome": "Mario José Limas",
+      "nomeConta": "Mario José Limas",
       "conta": 25468,
       "cpf": 11548569512,
       "agencia": 3632,
       "banco": "Itaú",
       "id": 3
+    },
+    {
+      "id": 4,
+      "nomeConta": "Matias da Silva",
+      "cpf": 85698547811,
+      "banco": "PagBank",
+      "agencia": 8991,
+      "conta": 3658
     }
   ]
 }

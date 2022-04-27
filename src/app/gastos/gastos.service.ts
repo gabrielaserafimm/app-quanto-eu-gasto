@@ -24,7 +24,9 @@ export class GastosService {
   findById(id: number): Observable<Gasto> {
     return this.httpClient.get<Gasto>(`${environment.apiUrl}/gastos/${id}`);
   }
-
+  findAll(): Observable<Gasto[]>{
+    return this.httpClient.get<Gasto[]>(`${environment.apiUrl}/gastos`);
+  }
   save(gasto: Gasto): Observable<Gasto> {
     if(gasto.id){
       return this.httpClient.put<Gasto>(`${environment.apiUrl}/gastos/${gasto.id}`, gasto);

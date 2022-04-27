@@ -37,6 +37,10 @@ const routes: Routes = [
         loadChildren: () => import('../gastos/dashboard/dashboard.module').then( m => m.DashboardPageModule)
       },
       {
+        path: 'conta-bancaria-register',
+        loadChildren: () => import('../conta-bancaria-register/conta-bancaria-register.module').then( m => m.ContaBancariaRegisterPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'
