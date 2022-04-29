@@ -4,10 +4,13 @@
     </ion-toolbar> 
 </ion-header>
 <ion-content [formGroup]="form">
-  
+  <div class="ion-text-center" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="!loading">
   <ion-item> 
       <ion-label position="stacked">Nome: </ion-label>
-          <ion-input type="text" formControlName="nomeConta"></ion-input>
+          <ion-input type="text" formControlName="nome"></ion-input>
   </ion-item>
   <ion-item>
       <ion-label position="stacked">CPF: </ion-label>
@@ -30,4 +33,5 @@
         <ion-icon name="checkmark-outline"></ion-icon>
       </ion-fab-button>
   </ion-fab>
+  </div>
 </ion-content>

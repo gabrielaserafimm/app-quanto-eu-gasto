@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <div class="ion-text-center" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="!loading">
     <ion-card *ngFor="let conta of contaBancaria"> 
       <div class="conteudo">
         <div class="pt-1">
@@ -25,4 +29,5 @@
         </div>        
       </ion-card-content>
     </ion-card> 
+  </div>
 </ion-content>

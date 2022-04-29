@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
 import { ContaBancariaDestaqueService } from '../conta-bancaria-destaque.service';
 import { ContaBancaria } from '../conta-bancaria.model';
 
@@ -7,7 +8,9 @@ import { ContaBancaria } from '../conta-bancaria.model';
   templateUrl: './conta-bancaria-destaque.page.html',
   styleUrls: ['./conta-bancaria-destaque.page.scss'],
 })
-export class ContaBancariaDestaquePage implements OnInit {
+export class ContaBancariaDestaquePage implements 
+OnInit,
+ViewWillEnter {
 
   loading = false;
   contaBancaria: ContaBancaria[];
@@ -16,6 +19,11 @@ export class ContaBancariaDestaquePage implements OnInit {
 
   ngOnInit() {
     this.loadDestaque();
+  }
+
+  ionViewWillEnter(): void {
+    this.loadDestaque();
+    console.log('ContaBancariaDestaquePage ionViewWillEnter');
   }
 
   loadDestaque(){

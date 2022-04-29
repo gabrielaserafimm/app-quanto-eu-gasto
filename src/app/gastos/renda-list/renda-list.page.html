@@ -6,6 +6,10 @@
 
 <ion-content>
   <ion-list>
+    <div class="ion-text-center" *ngIf="loading">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div *ngIf="!loading">
     <ion-item-sliding *ngFor="let renda of rendas">
       
       <ion-item-options side="start">
@@ -39,7 +43,7 @@
           
             <h3 *ngFor="let conta of renda.contas">
               Pagamento:
-              <strong>{{ conta.banco }} | {{ conta.nomeConta }}</strong>
+              <strong>{{ conta.banco }} | {{ conta.nome }}</strong>
             </h3>
           
           
@@ -47,6 +51,7 @@
       </ion-item>
       
     </ion-item-sliding>
+  </div>
   </ion-list>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end">

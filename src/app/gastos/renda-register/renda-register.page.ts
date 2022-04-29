@@ -11,6 +11,7 @@ import {
 import { GastosService } from '../gastos.service';
 import { ContaBancaria } from '../../conta-bancaria/conta-bancaria.model';
 import { ContaBancariaService } from '../../conta-bancaria/conta-bancaria.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-renda-register',
@@ -27,6 +28,7 @@ export class RendaRegisterPage implements
 {
   form: FormGroup;
   contas: ContaBancaria[];
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,7 +60,15 @@ export class RendaRegisterPage implements
   }
 
   findByIdRenda(id: number){
-    this.gastosService.findByIdRenda(id).subscribe(
+    this.loading = true;
+    this.gastosService
+    .findByIdRenda(id)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+      })
+    )
+    .subscribe(
       (renda) => {
         if (renda) {
           this.form.patchValue({
@@ -66,9 +76,12 @@ export class RendaRegisterPage implements
           });
         }
       },
-      () => this.messageService.error(`Erro ao buscar a renda com o código <b>${id}</b>`,() => this.findByIdRenda(id))
+      () => this.messageService.error(
+        `Erro ao buscar a renda com o código <b>${id}</b>`,
+        () => this.findByIdRenda(id))
     );
   }
+
   ionViewWillEnter(): void {
     console.log('RendaRegisterPage ionViewWillEnter');
   }
@@ -103,12 +116,23 @@ export class RendaRegisterPage implements
 
   salvarRenda() {
     const { nomeRenda } = this.form.value;
-    this.gastosService.saveRenda(this.form.value).subscribe(
-      () => this.router.navigate(['tabs/renda-list']),
-      () =>
-      this.messageService.error(`Erro ao salvar a nova renda <b>${nomeRenda}</b>`, () =>
-        this.salvarRenda()
-      )
+
+    this.loading = true;
+    this.gastosService.saveRenda(this.form.value)
+    .pipe(
+      finalize(() => {
+        this.loading = false;
+      })
+    ).subscribe(
+      () => { 
+        this.messageService.success(`Renda ${nomeRenda} foi salva sucesso!`);
+        this.router.navigate(['tabs/renda-list']);
+    },
+      () => {
+        this.messageService.error(`Erro ao salvar a nova renda <b>${nomeRenda}</b>`, () =>
+          this.salvarRenda()
+        );
+      }
     ); 
   }
 }

@@ -3,9 +3,10 @@
     <ion-title color="primary">Contas Bancárias</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>  
-  <ion-spinner *ngIf="loading" name="bubbles"></ion-spinner>
+  <div class="ion-text-center" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
   <div *ngIf="!loading">
     <ion-button color="warning" class="contas-destaques" [routerLink]="['/tabs/conta-bancaria-destaque']"><span class="title-button-destaque">Minhas contas bancárias destaques</span></ion-button>
     <ion-card *ngFor="let conta of contaBancaria"> 
@@ -29,7 +30,7 @@
       </div>
       <ion-card-content> 
         <div class="pt-1">
-          <h3>{{conta.nomeConta}}</h3>        
+          <h3>{{conta.nome}}</h3>        
           <h3>Agência: {{conta.agencia}}</h3>        
         </div>
         <div class="pt-2"> 

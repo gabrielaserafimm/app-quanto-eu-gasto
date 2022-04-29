@@ -101,11 +101,12 @@ ViewDidLeave
           this.messageService.success(`O gasto ${nome} foi salvo sucesso!`);
           this.router.navigate(['tabs/inicio']);
         },
-        () =>
-        this.messageService.error(`Erro ao salvar o novo gasto <b>${nome}</b>`, () =>
-        this.salvar()
-        )
-        ); 
-      }
+        () => {
+          this.messageService.error(`Erro ao salvar o novo gasto <b>${nome}</b>`, () =>
+            this.salvar()
+        );
+        }
+      ); 
     }
+  }
     

@@ -50,7 +50,7 @@
       "data": "2022-04-26T23:37:23.756-03:00",
       "contas": [
         {
-          "nomeConta": "Pedro Simão",
+          "nome": "Pedro Simão",
           "conta": 95625,
           "cpf": 16236925800,
           "agencia": 6525,
@@ -67,7 +67,7 @@
       "data": "2022-04-17T23:41:20.817-03:00",
       "contas": [
         {
-          "nomeConta": "Maria da Silva Pereira",
+          "nome": "Maria da Silva Pereira",
           "conta": 72685,
           "cpf": 16548715266,
           "agencia": 3308,
@@ -79,15 +79,15 @@
   ],
   "contas": [
     {
-      "nomeConta": "Maria da Silva Pereira",
-      "conta": 72685,
-      "cpf": 16548715266,
-      "agencia": 3308,
+      "id": 1,
+      "nome": "Maria da Silva Pereira",
+      "cpf": 16548715265,
       "banco": "Nu Pagamentos",
-      "id": 1
+      "agencia": 3308,
+      "conta": 72685
     },
     {
-      "nomeConta": "Pedro Simão",
+      "nome": "Pedro Simão",
       "conta": 95625,
       "cpf": 16236925800,
       "agencia": 6525,
@@ -95,7 +95,7 @@
       "id": 2
     },
     {
-      "nomeConta": "Mario José Limas",
+      "nome": "Mario José Limas",
       "conta": 25468,
       "cpf": 11548569512,
       "agencia": 3632,
@@ -104,7 +104,7 @@
     },
     {
       "id": 4,
-      "nomeConta": "Matias da Silva",
+      "nome": "Matias da Silva",
       "cpf": 85698547811,
       "banco": "PagBank",
       "agencia": 8991,

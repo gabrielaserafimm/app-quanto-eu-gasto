@@ -8,6 +8,7 @@ ViewWillEnter,
 ViewWillLeave,
 } from '@ionic/angular';
 import { Renda } from '../gastos.model';
+import { finalize } from 'rxjs/operators';
 import { MessageService } from 'src/app/services/message.service';
 import { GastosService } from '../gastos.service';
 
@@ -62,15 +63,18 @@ ViewDidLeave {
 
   listRendas(){
     this.loading = true;
-    this.gastosService.getRendas().subscribe(
-      (rendas) => {
-        this.rendas = rendas
+    this.gastosService
+    .getRendas()
+    .pipe(
+      finalize(() =>{ 
         this.loading = false;
-      },
-      () => {
-        this.messageService.error('Erro ao buscar a lista de rendas', () => this.listRendas())
-        this.loading = false;
-      }
+      })
+    )
+    .subscribe(
+      (rendas) => (
+        this.rendas = rendas),() => this.messageService.error('Erro ao buscar a lista de rendas', () =>
+        this.listRendas()
+        )
     );
   }  
 
@@ -93,11 +97,20 @@ ViewDidLeave {
   }
 
   removeRenda(renda: Renda) {
-    this.gastosService.removeRenda(renda.id)
+    this.loading = true;
+    this.gastosService
+      .removeRenda(renda.id)
       .subscribe(
-      () => {
+      () => {        
+        this.messageService.success(`Excluído a renda ${renda.nomeRenda} com sucesso!`);
         this.listRendas();
       },
-      () => this.messageService.error('Erro ao excluir a renda', () => this.removeRenda(renda)));
+      () => {
+        this.messageService.error('Erro ao excluir a renda', () => 
+          this.removeRenda(renda)
+          );
+          this.loading = false;
+        }
+      );
   }   
 }
