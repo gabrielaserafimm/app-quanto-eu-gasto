@@ -14,7 +14,8 @@ export class DashboardPage implements OnInit {
   labelGastos = [];
   gastos = [];
   dados = [];
-
+  total = 0;
+  i = 0;
   pieChart: any;
 
   constructor(
@@ -34,11 +35,15 @@ export class DashboardPage implements OnInit {
 
     let dadosGrafico = [];
     this.gastosService.findAll().subscribe(response => {
-      this.gastos.forEach(gasto => {
-        dadosGrafico.push(gasto.valor)
-      })
+      this.gastos.forEach(gasto => {dadosGrafico.push(gasto.valor)})
 
       this.dados = dadosGrafico;
+
+      for (
+        var i = 0, 
+        total = 0; i < this.dados.length;
+        this.total += this.dados[i++]
+      );
 
       const ctx = <HTMLCanvasElement>document.getElementById('pieCanvas');
       const chartData = {
@@ -70,6 +75,7 @@ export class DashboardPage implements OnInit {
           data: chartData
         });
     });
-  });
-  }
+  });    
+  };
+
 }
