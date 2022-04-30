@@ -1,140 +1,81 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, ViewDidEnter, ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import { finalize } from 'rxjs/operators';
 import { Gasto } from '../gastos.model';
 import { GastosService } from '../gastos.service';
 import { MessageService } from 'src/app/services/message.service';
-import  Chart from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements 
-OnInit, 
-OnDestroy,
-ViewWillEnter,
-ViewDidEnter,
-ViewWillLeave,
-ViewDidLeave, 
-AfterViewInit {
+export class DashboardPage implements OnInit {
 
-@ViewChild ('pieCanvas') private pieCanvas: ElementRef;
-pieChart: any;
+  labelGastos = [];
+  gastos = [];
+  dados = [];
 
-gastos: Gasto[] = [];
-loading = false;
-private graficoChart: Chart
+  pieChart: any;
 
-constructor(
-  private alertController: AlertController,
-  private gastosService: GastosService,
-  private messageService: MessageService,
-  private ref: ChangeDetectorRef
-) {
-    this.gastos = [];
-  }
-  ngAfterViewInit() {
-    this.graficoCharts();
+  constructor(
+    private gastosService: GastosService ) {}
+
+  async ngOnInit() {
+    await this.getPieCharts();
   }
 
-  ngOnInit() {
-    this.ref.detectChanges();
-    this.graficoCharts();
-  }
-  
-  ionViewWillEnter(): void {
-    this.listGastos();
-    console.log('DashboardPage ionViewWillEnter');
-  }
-  
-  ionViewDidEnter(): void {
-    console.log('DashboardPage ionViewDidEnter');
-  }
-  
-  ionViewWillLeave(): void {
-    console.log('DashboardPage ionViewWillLeave');
-  }
-  
-  ionViewDidLeave(): void {
-    console.log('DashboardPage ionViewDidLeave');
-  }
-  
-  ngOnDestroy(): void {
-    console.log('DashboardPage ngOnDestroy');
-  }
-  
-  listGastos(){
-    this.loading = true;
-    this.gastosService.getGastos().pipe(finalize(() => {
-    this.loading = false;
-    }))
-    .subscribe(
-      (gastos) => (this.gastos = gastos),
-      () => 
-      this.messageService.error('Erro ao buscar a lista de gastos', () => this.listGastos()
-      )
-    );
-  }   
+  async getPieCharts() {    
     
-confirmRemove(gasto: Gasto) {
-  this.alertController
-  .create({
-    header: 'Exclusão',
-    message: `Você deseja excluir o gasto <b>${gasto.nome}</b>?`,
-    buttons: [
-      {
-        text: 'Sim',
-        handler: () => this.remove(gasto),
-      },
-      {
-        text: 'Não',
-      },
-    ],
-  })
-  .then((alert) => alert.present());
-}
-  
-remove(gasto: Gasto) {
-  this.loading = true;
-  this.gastosService.remove(gasto.id).subscribe(
-    () => {
-      this.messageService.success(`O gasto ${gasto.nome} foi excluído com sucesso!`);
-      this.listGastos();
-    },
-    () => { this.messageService.error('Erro ao excluir o gasto', () => this.remove(gasto));
-    this.loading = false;
+    this.gastosService.findAll().subscribe(async response => {
+      this.gastos = response;
+      response.forEach(gasto => {
+        this.labelGastos.push(gasto.nome.split(" ")[0])
+      });
+
+    let dadosGrafico = [];
+    this.gastosService.findAll().subscribe(response => {
+      this.gastos.forEach(gasto => {
+        dadosGrafico.push(response.filter(gasto => gasto.valor).length);
+        })  
+        console.log(this.gastos);
+      this.dados = dadosGrafico;
+
+      const ctx = <HTMLCanvasElement>document.getElementById('pieCanvas');
+      const chartData = {
+        labels: this.labelGastos,
+          datasets: [{
+            label: 'Gastos X Mês',
+            data: this.dados,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+            borderColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+            borderWidth: 1
+          }]
+        };
+        this.pieChart = new Chart(ctx.getContext('2d'), {
+          type: 'pie',
+          data: chartData
+        });
+
     });
+  });
   }
 
-  graficoCharts(){        
-    const gGastos = this.gastos.filter(gastos => gastos.valor > 0)
-    const cores = [
-      '#ffc409',
-      '#eb445a',
-      '#3dc2ff',
-      '#92949c',
-      '#2fdf75'
-    ];
-    
-    let i = -1;    
-    const gCores = gGastos.map(() => cores[(i = (i + 1) % cores.length)]);
-    
-    this.pieChart = new Chart(this.pieCanvas.nativeElement, {
-      type: 'pie',
-      data: {
-        labels: gGastos.map(gastos => gastos.nome),
-        datasets: [{
-          data: gGastos.map(gastos => gastos.valor),
-          backgroundColor: gCores,
-          borderColor: gCores,
-          borderWidth: 1
-        }]
-      },
-      options: {}
-    });
-    this.pieChart.destroy();
-  }    
 }
-  

@@ -5,7 +5,7 @@
       "nome": "Mercado",
       "metod_pag": "Cartão de Crédito",
       "valor": 251,
-      "data": "2021-09-19",
+      "data": "2021-11-19T00:00:00-03:00",
       "mes": "Novembro"
     },
     {
@@ -14,7 +14,7 @@
       "metod_pag": "Dinheiro",
       "valor": 152.99,
       "data": "2021-11-11",
-      "mes": "Fevereiro"
+      "mes": "Novembro"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "metod_pag": "Cartão de Débito",
       "valor": 57.9,
       "data": "2021-11-19",
-      "mes": "Abril"
+      "mes": "Novembro"
     },
     {
       "id": 4,
@@ -38,7 +38,7 @@
       "metod_pag": "Cartão de Crédito",
       "valor": 0.1,
       "data": "2022-04-09T13:50:13.528-03:00",
-      "mes": "Novembro"
+      "mes": "Abril"
     }
   ],
   "rendas": [
