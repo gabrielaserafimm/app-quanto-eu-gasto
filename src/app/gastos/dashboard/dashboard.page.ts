@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ViewDidEnter, ViewDidLeave, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
-import { finalize } from 'rxjs/operators';
-import { Gasto } from '../gastos.model';
 import { GastosService } from '../gastos.service';
-import { MessageService } from 'src/app/services/message.service';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -39,16 +35,16 @@ export class DashboardPage implements OnInit {
     let dadosGrafico = [];
     this.gastosService.findAll().subscribe(response => {
       this.gastos.forEach(gasto => {
-        dadosGrafico.push(response.filter(gasto => gasto.valor).length);
-        })  
-        console.log(this.gastos);
+        dadosGrafico.push(gasto.valor)
+      })
+
       this.dados = dadosGrafico;
 
       const ctx = <HTMLCanvasElement>document.getElementById('pieCanvas');
       const chartData = {
         labels: this.labelGastos,
           datasets: [{
-            label: 'Gastos X Mês',
+            label: 'Gasto X Valor',
             data: this.dados,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -70,12 +66,10 @@ export class DashboardPage implements OnInit {
           }]
         };
         this.pieChart = new Chart(ctx.getContext('2d'), {
-          type: 'pie',
+          type: 'bar',
           data: chartData
         });
-
     });
   });
   }
-
 }
